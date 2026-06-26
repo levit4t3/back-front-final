@@ -34,7 +34,10 @@ public class SecurityConfig {
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/register", "/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                .requestMatchers(
+                    "/login", "/register", "/css/**", "/js/**", "/images/**", "/webjars/**",
+                    "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
+                ).permitAll()
                 .requestMatchers("/rooms/new", "/rooms/*/edit", "/rooms/*/delete").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

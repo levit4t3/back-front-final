@@ -37,7 +37,9 @@ public class ReservationController {
         if (authentication == null || !authentication.isAuthenticated()) {
             return "redirect:/login";
         }
-        if (isAdmin(authentication)) {
+        boolean admin = isAdmin(authentication);
+        model.addAttribute("isAdmin", admin);
+        if (admin) {
             model.addAttribute("reservations", reservationService.findAll());
         } else {
             User user = userService.findByUsername(authentication.getName());
